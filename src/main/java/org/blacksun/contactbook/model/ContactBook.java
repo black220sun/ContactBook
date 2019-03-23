@@ -9,33 +9,38 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Component
-public class ContactBook {
+public class ContactBook implements Storage<String, Contact> {
     private final HashMap<String, Contact> contacts;
 
     public ContactBook() {
         contacts = new HashMap<>();
     }
 
-    public List<Contact> getContacts() {
+    @Override
+    public List<Contact> getAll() {
         return new ArrayList<>(contacts.values());
     }
 
-    public Optional<Contact> getContact(String name) {
+    @Override
+    public Optional<Contact> getOne(String name) {
         return Optional.ofNullable(contacts.get(name));
     }
 
-    public boolean addContact(Contact contact) {
-        final String name = contact.getName();
+    @Override
+    public boolean addOne(Contact contact) {
+        final String name = contact.getId();
         if (contacts.containsKey(name))
             return false;
         contacts.put(name, contact);
         return true;
     }
 
-    public boolean removeContact(String name) {
+    @Override
+    public boolean remove(String name) {
         return contacts.remove(name) != null;
     }
 
+    @Override
     public void clear() {
         contacts.clear();
     }

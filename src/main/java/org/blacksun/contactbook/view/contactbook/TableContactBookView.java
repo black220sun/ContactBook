@@ -4,11 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.swing.*;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 
 @Component
-public class TableContactBookView extends JList<Object> implements ContactBookView {
+public class TableContactBookView extends JList<Object> implements UpdatableComponent {
     private final ContactBookModel model;
 
     @Autowired

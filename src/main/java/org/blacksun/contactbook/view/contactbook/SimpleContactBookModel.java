@@ -24,6 +24,6 @@ public class SimpleContactBookModel extends ContactBookModel {
 
     @Override
     public ContactWrapper getElementAt(int index) {
-        return factory.wrap(contactBook.getContacts().get(index));
+        return factory.wrap(contactBook.getAll().get(index));
     }
 }
