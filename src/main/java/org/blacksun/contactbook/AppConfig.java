@@ -10,12 +10,12 @@ import java.awt.*;
 @ComponentScan("org.blacksun.contactbook")
 public class AppConfig {
     @Bean
-    public String getTitle() {
+    public String getFrameTitle() {
         return "ContactBook";
     }
 
     @Bean
-    public Dimension getDimension() {
+    public Dimension getFrameDimension() {
         return new Dimension(1200, 600);
     }
 }

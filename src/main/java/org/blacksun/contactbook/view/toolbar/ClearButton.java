@@ -2,12 +2,15 @@ package org.blacksun.contactbook.view.toolbar;
 
 import org.blacksun.contactbook.controller.ContactBookController;
 
-import javax.swing.*;
-import java.awt.*;
+class ClearButton implements Command {
+    private final ContactBookController controller;
 
-class ClearButton extends JButton {
     ClearButton(ContactBookController controller) {
-        super("Clear");
-        addActionListener(e -> controller.clear());
+        this.controller = controller;
+    }
+
+    @Override
+    public void execute() {
+        controller.clear();
     }
 }

@@ -28,19 +28,17 @@ public class IconWrapper implements ContactWrapper, Icon {
         this.contact = contact;
     }
 
-    private void drawText(Graphics g, String text, int x, Incrementer y) {
+    private void drawText(Graphics g, String text, int x, int y) {
         final char[] chars = text.toCharArray();
         g.drawChars(chars, 0, chars.length,
-                x, y.getNextValue());
+                x, y);
     }
 
     @Override
     public void paintIcon(Component c, Graphics g, int x, int y) {
         Incrementer closure = new Incrementer(y, FONT_SIZE);
-        drawText(g, contact.getName(), x, closure);
-        contact.getPhoneNumbers().forEach(phone -> {
-            drawText(g, phone, x + 16, closure);
-        });
+        drawText(g, contact.getName(), x, closure.getNextValue());
+        contact.getPhoneNumbers().forEach(phone -> drawText(g, phone, x + 16, closure.getNextValue()));
     }
 
     @Override
