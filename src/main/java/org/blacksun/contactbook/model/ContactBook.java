@@ -47,7 +47,7 @@ public class ContactBook implements Storage<String, Contact> {
 
     public List<Contact> contactsByPhoneNumber(String phoneNumber) {
         return contacts.values().stream()
-                .filter(it -> it.getName().equals(phoneNumber))
+                .filter(it -> it.getPhoneNumbers().contains(phoneNumber))
                 .collect(Collectors.toList());
     }
 
