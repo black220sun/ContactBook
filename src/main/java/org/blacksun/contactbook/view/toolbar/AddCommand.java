@@ -3,25 +3,26 @@ package org.blacksun.contactbook.view.toolbar;
 import org.blacksun.contactbook.controller.ContactBookController;
 import org.blacksun.contactbook.model.Contact;
 
-import javax.swing.*;
+import java.util.function.Supplier;
 
 class AddCommand implements Command {
     private final ContactBookController controller;
-    private final JTextField nameField;
-    private final JTextField phoneField;
+    private final Supplier<String> nameSupplier;
+    private final Supplier<String> phoneSupplier;
 
-    AddCommand(ContactBookController controller, JTextField name, JTextField phone) {
+    AddCommand(ContactBookController controller, Supplier<String> nameSupplier, Supplier<String> phoneSupplier) {
         this.controller = controller;
-        this.nameField = name;
-        this.phoneField = phone;
+        this.nameSupplier = nameSupplier;
+        this.phoneSupplier = phoneSupplier;
     }
 
     @Override
-    public void execute() {
-        final String name = nameField.getText();
+    public boolean execute() {
+        final String name = nameSupplier.get();
         if (!name.isEmpty()) {
-            controller.addContact(new Contact(name, phoneField.getText()));
-            phoneField.setText("");
+            controller.addContact(new Contact(name, phoneSupplier.get()));
+            return true;
         }
+        return false;
     }
 }

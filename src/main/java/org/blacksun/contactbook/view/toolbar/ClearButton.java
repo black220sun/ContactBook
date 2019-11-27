@@ -10,7 +10,8 @@ class ClearButton implements Command {
     }
 
     @Override
-    public void execute() {
+    public boolean execute() {
         controller.clear();
+        return true;
     }
 }

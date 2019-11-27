@@ -2,22 +2,22 @@ package org.blacksun.contactbook.view.toolbar;
 
 import org.blacksun.contactbook.controller.ContactBookController;
 
-import javax.swing.*;
+import java.util.function.Supplier;
 
 class DeletePhoneCommand implements Command {
     private final ContactBookController controller;
-    private final JTextField nameField;
-    private final JTextField phoneField;
+    private final Supplier<String> nameSupplier;
+    private final Supplier<String> phoneSupplier;
 
-    DeletePhoneCommand(ContactBookController controller, JTextField name, JTextField phone) {
+    DeletePhoneCommand(ContactBookController controller, Supplier<String> nameSupplier, Supplier<String> phoneSupplier) {
         this.controller = controller;
-        this.nameField = name;
-        this.phoneField = phone;
+        this.nameSupplier = nameSupplier;
+        this.phoneSupplier = phoneSupplier;
     }
 
     @Override
-    public void execute() {
-        controller.removePhoneNumber(nameField.getText(), phoneField.getText());
-        phoneField.setText("");
+    public boolean execute() {
+        controller.removePhoneNumber(nameSupplier.get(), phoneSupplier.get());
+        return true;
     }
 }
